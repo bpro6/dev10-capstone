@@ -41,18 +41,18 @@ size enum ('SMALL','MEDIUM','LARGE') null,
 `description` varchar(1000) null
 );
 
-create table `session` (
+create table yoga_session (
 
-session_id int primary key auto_increment,
+yoga_session_id int primary key auto_increment,
 start_time datetime not null,
 end_time datetime not null,
 capacity int,
 instructor_id int null,
 location_id int null,
-constraint fk_session_instructor_user_id
+constraint fk_yoga_session_instructor_user_id
         foreign key (instructor_id)
         references app_user(app_user_id),
-constraint fk_session_location_id
+constraint fk_yoga_session_location_id
 	foreign key (location_id)
 	references location (location_id)
 );
@@ -61,12 +61,12 @@ create table reservation
 (
 reservation_id int primary key auto_increment,
 
-session_id int not null,
+yoga_session_id int not null,
 student_id int not null,
 
 constraint fk_reservation_session_id
-		foreign key (session_id)
-        references `session`(session_id),
+		foreign key (yoga_session_id)
+        references yoga_session (yoga_session_id),
 constraint fk_reservation_guest_id        
 		foreign key (student_id)
         references app_user(app_user_id)
